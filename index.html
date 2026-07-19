@@ -219,6 +219,9 @@ const ADMIN_ID  = "6324697963";
 const myId   = String(tg.initDataUnsafe?.user?.id || "");
 const isAdm  = myId === ADMIN_ID;
 
+// ── Server URL ───────────────────────────────────────────
+const SERVER = "https://botnexpro-production.up.railway.app";
+
 // ── Default config ───────────────────────────────────────
 const DEFAULTS = {
   phone:    "+998 90 000 00 00",
@@ -230,10 +233,22 @@ const DEFAULTS = {
   years:    "2+",
 };
 
-// ── Config o'qish/saqlash ────────────────────────────────
+// ── Config serverdan olish ───────────────────────────────
+async function loadCfgFromServer() {
+  try {
+    const r = await fetch(`${SERVER}/cfg?t=${Date.now()}`);
+    if (r.ok) {
+      const cfg = await r.json();
+      localStorage.setItem('bnp_cfg', JSON.stringify(cfg));
+      return cfg;
+    }
+  } catch(e) { console.log("Server cfg xato:", e.message); }
+  return getCfg();
+}
+
 function getCfg() {
-  try { const c=JSON.parse(localStorage.getItem('bnp_cfg')||'{}'); return {...DEFAULTS,...c}; }
-  catch(e){return {...DEFAULTS};}
+  try { return {...DEFAULTS,...JSON.parse(localStorage.getItem('bnp_cfg')||'{}')}; }
+  catch(e) { return {...DEFAULTS}; }
 }
 
 function setCfg(cfg) {
@@ -374,16 +389,21 @@ async function saveSettings(){
   setCfg(cfg);
   applyCfg(cfg);
 
-  // Bot orqali config saqlansin — boshqa qurilmalarda ham ishlash uchun
-  try{
-    const cfgTxt=`⚙️ CONFIG_UPDATE\n${JSON.stringify(cfg)}`;
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id:ADMIN_ID,text:cfgTxt})
+  // Serverga yuborish — hamma uchun yangilansin
+  try {
+    const r = await fetch(`${SERVER}/cfg`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Id': ADMIN_ID },
+      body: JSON.stringify(cfg)
     });
-  }catch(err){}
-
-  tg.showAlert('✅ Saqlandi! Sozlamalar yangilandi.');
+    if (r.ok) {
+      tg.showAlert('✅ Saqlandi! Hamma uchun yangilandi.');
+    } else {
+      tg.showAlert('✅ Qurilmangizda saqlandi.');
+    }
+  } catch(e) {
+    tg.showAlert('✅ Saqlandi (offline rejim).');
+  }
 }
 
 function clearOrders(){
@@ -402,10 +422,14 @@ function goSlide(i){
 setInterval(()=>goSlide((cur+1)%3),3500);
 
 // ── Init ─────────────────────────────────────────────────
-(function init(){
+(async function init(){
   if(isAdm) document.getElementById('nav-admin').style.display='';
+  // Avval localStorage dan tez yukla
   applyCfg(getCfg());
   selType('bot');
+  // Keyin serverdan yangi config ol
+  const freshCfg = await loadCfgFromServer();
+  applyCfg(freshCfg);
 })();
 </script>
 </body>
