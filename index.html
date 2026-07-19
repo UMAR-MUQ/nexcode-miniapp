@@ -393,16 +393,21 @@ async function saveSettings(){
   try {
     const r = await fetch(`${SERVER}/cfg`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Admin-Id': ADMIN_ID },
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Admin-Id': ADMIN_ID
+      },
       body: JSON.stringify(cfg)
     });
     if (r.ok) {
       tg.showAlert('✅ Saqlandi! Hamma uchun yangilandi.');
     } else {
-      tg.showAlert('✅ Qurilmangizda saqlandi.');
+      tg.showAlert('⚠️ Server xato: ' + r.status);
     }
   } catch(e) {
-    tg.showAlert('✅ Saqlandi (offline rejim).');
+    console.error('Save xato:', e);
+    tg.showAlert('⚠️ Internetni tekshiring: ' + e.message);
   }
 }
 
