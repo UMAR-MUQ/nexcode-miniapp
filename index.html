@@ -9,54 +9,138 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#0f0f0f;--bg2:#1a1a1a;--bg3:#242424;
-  --accent:#4f8ef7;--accent2:#6c63ff;--green:#4caf50;--red:#f44336;
-  --text:#fff;--text2:#aaa;--nav-h:70px;--r:16px;
+  --accent:#4f8ef7;--accent2:#6c63ff;
+  --text:#fff;--text2:#aaa;--r:16px;
 }
 html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;overflow-x:hidden}
-.page{display:none;padding:16px 16px calc(var(--nav-h)+16px);animation:fi .2s ease}
+.page{display:none;padding:16px 16px 90px;animation:fi .2s ease}
 .page.active{display:block}
-@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.sec-t{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;padding-left:2px}
+.card{background:var(--bg2);border-radius:var(--r);border:1px solid #252525}
+.svc{padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:14px;font-weight:600;cursor:pointer;border-radius:var(--r);background:var(--bg2);border:1px solid #252525;transition:all .15s}
+.svc:active{transform:scale(.95);background:var(--bg3)}
+.cnt{padding:14px 16px;display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text);border-radius:var(--r);background:var(--bg2);border:1px solid #252525;transition:background .15s}
+.cnt:active{background:var(--bg3)}
+.cl{font-size:11px;color:var(--text2);margin-bottom:2px}
+.cv{font-size:15px;font-weight:700;color:var(--accent)}
+.pg-h{text-align:center;margin-bottom:20px;padding-top:4px}
+.pg-h h2{font-size:21px;font-weight:700;margin-bottom:4px}
+.pg-h p{font-size:13px;color:var(--text2)}
+.ot{padding:20px 14px;text-align:center;cursor:pointer;border-radius:var(--r);background:var(--bg2);border:2px solid #252525;transition:all .15s}
+.ot.sel{border-color:var(--accent);background:#162033}
+.ot:active{transform:scale(.96)}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.fg input,.fg textarea{width:100%;background:var(--bg2);border:1px solid #2a2a2a;border-radius:12px;padding:13px 15px;color:var(--text);font-size:15px;outline:none;transition:border .2s;font-family:inherit}
+.fg textarea{min-height:90px;resize:none}
+.fg input:focus,.fg textarea:focus{border-color:var(--accent)}
+.btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;margin-top:6px;transition:opacity .15s}
+.btn:active{opacity:.85}
+.btn-red{background:linear-gradient(135deg,#c62828,#b71c1c)}
+.stat{padding:18px 10px;text-align:center;background:var(--bg2);border-radius:var(--r);border:1px solid #252525}
+.sn{font-size:24px;font-weight:800;color:var(--accent)}
+.sl{font-size:11px;color:var(--text2);margin-top:3px}
+.dot{width:7px;height:7px;border-radius:50%;background:#2a4a7a;cursor:pointer;transition:all .3s;display:inline-block}
+.dot.active{background:var(--accent);width:18px;border-radius:4px}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:8px 0;opacity:.45;transition:opacity .2s}
+.ni.active{opacity:1}
+.ni.active .nic{transform:scale(1.15)}
+.nic{font-size:21px;transition:transform .2s;display:block}
+.nl{font-size:10px;font-weight:600;display:block}
+.ni.active .nl{color:var(--accent)}
+.hidden{display:none!important}
+.ocard{background:var(--bg2);border-radius:12px;padding:13px;margin-bottom:10px;border:1px solid #252525;font-size:14px}
+.ocard-type{font-weight:700;color:var(--accent);margin-bottom:5px;font-size:13px}
+.ocard-name{margin-bottom:3px;font-weight:600}
+.ocard-tel{color:var(--text2);font-size:13px;margin-bottom:3px}
+.ocard-desc{color:#ccc;font-size:13px;border-top:1px solid #2a2a2a;padding-top:6px;margin-top:5px;line-height:1.5}
+.ocard-date{color:#555;font-size:11px;margin-top:5px}
+.tag{display:inline-block;background:#162033;color:var(--accent);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;margin-bottom:8px}
 </style>
 </head>
 <body>
 
-<!-- BOSH SAHIFA -->
+<!-- ═══ BOSH SAHIFA ═══ -->
 <div id="page-home" class="page active">
-  <div id="banner" style="background:linear-gradient(135deg,#1e3a5f,#0f1e35);border-radius:16px;padding:28px 20px 20px;margin-bottom:24px;border:1px solid #1e3a5f;overflow:hidden">
+  <div id="banner" style="background:linear-gradient(135deg,#1e3a5f,#0f1e35);border-radius:16px;padding:26px 20px 18px;margin-bottom:22px;border:1px solid #1e3a5f;overflow:hidden">
     <div id="slides" style="display:flex;transition:transform .4s ease">
-      <div style="min-width:100%;text-align:center"><div style="font-size:48px;margin-bottom:12px">🤖</div><h2 style="font-size:20px;margin-bottom:6px">Telegram Bot yaratish</h2><p style="font-size:14px;color:#8ab4f8">Biznes uchun professional botlar</p></div>
-      <div style="min-width:100%;text-align:center"><div style="font-size:48px;margin-bottom:12px">🌐</div><h2 style="font-size:20px;margin-bottom:6px">Web Sayt yaratish</h2><p style="font-size:14px;color:#8ab4f8">Zamonaviy va tez veb-saytlar</p></div>
-      <div style="min-width:100%;text-align:center"><div style="font-size:48px;margin-bottom:12px">⚡</div><h2 style="font-size:20px;margin-bottom:6px">Avtomatlashtirish</h2><p style="font-size:14px;color:#8ab4f8">Biznesingizni avtomatlashtiring</p></div>
+      <div style="min-width:100%;text-align:center"><div style="font-size:44px;margin-bottom:10px">🤖</div><h2 style="font-size:19px;margin-bottom:5px">Telegram Bot yaratish</h2><p style="font-size:13px;color:#8ab4f8">Biznes uchun professional botlar</p></div>
+      <div style="min-width:100%;text-align:center"><div style="font-size:44px;margin-bottom:10px">🌐</div><h2 style="font-size:19px;margin-bottom:5px">Web Sayt yaratish</h2><p style="font-size:13px;color:#8ab4f8">Zamonaviy va tez veb-saytlar</p></div>
+      <div style="min-width:100%;text-align:center"><div style="font-size:44px;margin-bottom:10px">⚡</div><h2 style="font-size:19px;margin-bottom:5px">Avtomatlashtirish</h2><p style="font-size:13px;color:#8ab4f8">Biznesingizni avtomatlashtiring</p></div>
     </div>
-    <div style="display:flex;justify-content:center;gap:6px;margin-top:16px" id="dots">
+    <div style="display:flex;justify-content:center;gap:6px;margin-top:14px">
       <span class="dot active" onclick="goSlide(0)"></span>
       <span class="dot" onclick="goSlide(1)"></span>
       <span class="dot" onclick="goSlide(2)"></span>
     </div>
   </div>
   <div class="sec-t">Xizmatlarimiz</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
-    <div class="svc" onclick="openPage('order')"><span style="font-size:28px">🤖</span><span>Telegram Bot</span></div>
-    <div class="svc" onclick="openPage('order')"><span style="font-size:28px">🌐</span><span>Web Sayt</span></div>
-    <div class="svc" onclick="openPage('order')"><span style="font-size:28px">📱</span><span>Mini App</span></div>
-    <div class="svc" onclick="openPage('order')"><span style="font-size:28px">⚙️</span><span>CRM / API</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px">
+    <div class="svc" onclick="openPage('order')"><span style="font-size:26px">🤖</span><span>Telegram Bot</span></div>
+    <div class="svc" onclick="openPage('order')"><span style="font-size:26px">🌐</span><span>Web Sayt</span></div>
+    <div class="svc" onclick="openPage('order')"><span style="font-size:26px">📱</span><span>Mini App</span></div>
+    <div class="svc" onclick="openPage('order')"><span style="font-size:26px">⚙️</span><span>CRM / API</span></div>
   </div>
-  <div class="sec-t">Aloqa</div>
-  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
-    <a id="lphone" href="tel:+998900000000" class="cnt"><span style="font-size:24px">📞</span><div><div class="cl">Telefon</div><div class="cv" id="cphone">+998 90 000 00 00</div></div></a>
-    <a id="ltg" href="https://t.me/botnexpro_admin" target="_blank" class="cnt"><span style="font-size:24px">💬</span><div><div class="cl">Telegram</div><div class="cv" id="ctg">@botnexpro_admin</div></div></a>
-    <a id="lig" href="https://instagram.com/botnexpro" target="_blank" class="cnt"><span style="font-size:24px">📸</span><div><div class="cl">Instagram</div><div class="cv" id="cig">@botnexpro</div></div></a>
+  <div class="sec-t" style="margin-bottom:10px">Tezkor aloqa</div>
+  <button class="btn" onclick="openPage('contact')" style="margin-bottom:0">📞 Biz bilan bog'lanish</button>
+</div>
+
+<!-- ═══ ALOQA SAHIFASI ═══ -->
+<div id="page-contact" class="page">
+  <div class="pg-h"><h2>📞 Aloqa</h2><p>Biz bilan bog'laning</p></div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+    <a id="lphone" href="tel:+998900000000" class="cnt">
+      <span style="font-size:32px;background:linear-gradient(135deg,#1e3a5f,#0d47a1);border-radius:12px;padding:8px;display:flex">📞</span>
+      <div style="flex:1">
+        <div class="cl">Telefon raqam</div>
+        <div class="cv" id="cphone">+998 90 000 00 00</div>
+        <div style="font-size:11px;color:#555;margin-top:2px">Bosing — qo'ng'iroq qiladi</div>
+      </div>
+      <span style="color:var(--accent);font-size:18px">›</span>
+    </a>
+    <a id="ltg" href="https://t.me/botnexpro_admin" target="_blank" class="cnt">
+      <span style="font-size:32px;background:linear-gradient(135deg,#0d2137,#1565c0);border-radius:12px;padding:8px;display:flex">💬</span>
+      <div style="flex:1">
+        <div class="cl">Telegram</div>
+        <div class="cv" id="ctg">@botnexpro_admin</div>
+        <div style="font-size:11px;color:#555;margin-top:2px">Bosing — Telegram ochiladi</div>
+      </div>
+      <span style="color:var(--accent);font-size:18px">›</span>
+    </a>
+    <a id="lig" href="https://instagram.com/botnexpro" target="_blank" class="cnt">
+      <span style="font-size:32px;background:linear-gradient(135deg,#4a148c,#880e4f);border-radius:12px;padding:8px;display:flex">📸</span>
+      <div style="flex:1">
+        <div class="cl">Instagram</div>
+        <div class="cv" id="cig">@botnexpro</div>
+        <div style="font-size:11px;color:#555;margin-top:2px">Bosing — Instagram ochiladi</div>
+      </div>
+      <span style="color:var(--accent);font-size:18px">›</span>
+    </a>
+  </div>
+  <div style="background:var(--bg2);border-radius:16px;padding:18px;border:1px solid #252525;text-align:center">
+    <div style="font-size:32px;margin-bottom:10px">🕐</div>
+    <div style="font-weight:700;margin-bottom:6px">Ish vaqti</div>
+    <div style="color:var(--text2);font-size:14px;line-height:1.7">Dushanba — Shanba<br>09:00 — 18:00</div>
   </div>
 </div>
 
-<!-- ZAKAZ -->
+<!-- ═══ ZAKAZ ═══ -->
 <div id="page-order" class="page">
   <div class="pg-h"><h2>📋 Zakaz berish</h2><p>Ma'lumotlarni to'ldiring</p></div>
   <div id="order-form">
-    <div class="sec-t">Xizmat turini tanlang</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px">
-      <div class="ot" id="ot-bot" onclick="selType('bot')"><div style="font-size:40px;margin-bottom:10px">🤖</div><div style="font-size:15px;font-weight:700;margin-bottom:6px">Telegram Bot</div><div style="font-size:12px;color:var(--text2)">Biznes, do'kon, ariza</div></div>
-      <div class="ot" id="ot-web" onclick="selType('web')"><div style="font-size:40px;margin-bottom:10px">🌐</div><div style="font-size:15px;font-weight:700;margin-bottom:6px">Web Sayt</div><div style="font-size:12px;color:var(--text2)">Landing, korporativ</div></div>
+    <div class="sec-t">Xizmat turi</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px">
+      <div class="ot sel" id="ot-bot" onclick="selType('bot')">
+        <div style="font-size:36px;margin-bottom:8px">🤖</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:4px">Telegram Bot</div>
+        <div style="font-size:11px;color:var(--text2)">Biznes, do'kon</div>
+      </div>
+      <div class="ot" id="ot-web" onclick="selType('web')">
+        <div style="font-size:36px;margin-bottom:8px">🌐</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:4px">Web Sayt</div>
+        <div style="font-size:11px;color:var(--text2)">Landing, do'kon</div>
+      </div>
     </div>
     <div class="fg"><label>Ism</label><input id="f-ism" type="text" placeholder="Ismingiz"/></div>
     <div class="fg"><label>Familiya</label><input id="f-fam" type="text" placeholder="Familiyangiz"/></div>
@@ -64,100 +148,61 @@ html,body{background:var(--bg);color:var(--text);font-family:-apple-system,Blink
     <div class="fg"><label id="desc-label">Bot haqida izoh</label><textarea id="f-desc" placeholder="Botingiz qanday ishlashi kerak? Batafsil yozing..."></textarea></div>
     <button class="btn" onclick="sendOrder()">📨 Zakaz yuborish</button>
   </div>
-  <div id="order-ok" class="hidden">
-    <div style="text-align:center;padding:40px 20px;background:var(--bg2);border-radius:16px;margin-top:20px;border:1px solid #2a3a2a">
-      <div style="font-size:60px;margin-bottom:16px">✅</div>
-      <h3 style="font-size:22px;margin-bottom:10px">Zakaz qabul qilindi!</h3>
-      <p style="font-size:14px;color:var(--text2);margin-bottom:24px;line-height:1.6">BotNexPro jamoasi tez orada siz bilan bog'lanadi.</p>
-      <button class="btn" onclick="openPage('home')">🏠 Bosh sahifaga</button>
-    </div>
+  <div id="order-ok" class="hidden" style="text-align:center;padding:40px 20px;background:var(--bg2);border-radius:16px;margin-top:10px;border:1px solid #2a3a2a">
+    <div style="font-size:56px;margin-bottom:14px">✅</div>
+    <h3 style="font-size:20px;margin-bottom:8px">Zakaz qabul qilindi!</h3>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:22px;line-height:1.6">BotNexPro jamoasi tez orada siz bilan bog'lanadi.</p>
+    <button class="btn" onclick="openPage('home')">🏠 Bosh sahifaga</button>
   </div>
 </div>
 
-<!-- BIZ HAQIMIZDA -->
+<!-- ═══ BIZ HAQIMIZDA ═══ -->
 <div id="page-about" class="page">
   <div class="pg-h"><h2>ℹ️ Biz haqimizda</h2></div>
-  <div style="text-align:center;margin-bottom:20px"><div style="font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">BotNexPro</div></div>
-  <div style="background:var(--bg2);border-radius:16px;padding:18px;font-size:15px;line-height:1.7;color:#ddd;margin-bottom:20px;border:1px solid #2a2a2a;white-space:pre-wrap" id="about-txt">BotNexPro — professional Telegram botlar, web saytlar va raqamli yechimlar yaratish bo'yicha xizmat ko'rsatuvchi kompaniya.</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
+  <div style="text-align:center;margin-bottom:18px">
+    <div style="font-size:30px;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px">BotNexPro</div>
+    <div style="font-size:13px;color:var(--text2)">Professional IT xizmatlari</div>
+  </div>
+  <div style="background:var(--bg2);border-radius:16px;padding:16px;font-size:14px;line-height:1.8;color:#ddd;margin-bottom:18px;border:1px solid #252525;white-space:pre-wrap" id="about-txt">BotNexPro — professional Telegram botlar, web saytlar va raqamli yechimlar yaratish bo'yicha xizmat ko'rsatuvchi kompaniya.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px">
     <div class="stat"><div class="sn" id="s-proj">50+</div><div class="sl">Loyiha</div></div>
     <div class="stat"><div class="sn" id="s-cli">30+</div><div class="sl">Mijoz</div></div>
     <div class="stat"><div class="sn" id="s-yr">2+</div><div class="sl">Yil</div></div>
   </div>
+  <button class="btn" onclick="openPage('contact')" style="background:var(--bg2);border:1px solid var(--accent);color:var(--accent)">📞 Bog'lanish</button>
 </div>
 
-<!-- ADMIN XONASI -->
+<!-- ═══ ADMIN XONASI ═══ -->
 <div id="page-admin" class="page">
   <div class="pg-h"><h2>🛠 Admin Panel</h2></div>
-
-  <!-- Statistika -->
   <div class="sec-t">Statistika</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px">
     <div class="stat"><div class="sn" id="a-orders">0</div><div class="sl">Zakazlar</div></div>
-    <div class="stat"><div class="sn" id="a-income" style="font-size:18px">0 so'm</div><div class="sl">Daromad</div></div>
+    <div class="stat"><div class="sn" id="a-income" style="font-size:16px">0</div><div class="sl">Daromad (so'm)</div></div>
   </div>
-
-  <!-- Zakazlar -->
-  <div class="sec-t">So'nggi zakazlar</div>
-  <div id="orders-list" style="margin-bottom:24px"></div>
-
-  <!-- Ma'lumotlarni o'zgartirish -->
   <div class="sec-t">Sozlamalar</div>
-  <div class="fg"><label>Telefon</label><input id="a-phone" type="tel" placeholder="+998 90 000 00 00"/></div>
-  <div class="fg"><label>Telegram</label><input id="a-tg" type="text" placeholder="@botnexpro_admin"/></div>
+  <div class="fg"><label>Telefon raqam</label><input id="a-phone" type="tel" placeholder="+998 90 000 00 00"/></div>
+  <div class="fg"><label>Telegram username</label><input id="a-tg" type="text" placeholder="@botnexpro_admin"/></div>
+  <div class="fg"><label>Instagram username</label><input id="a-ig" type="text" placeholder="@botnexpro"/></div>
   <div class="fg"><label>Biz haqimizda matni</label><textarea id="a-about" style="min-height:80px"></textarea></div>
-  <div class="fg"><label>Loyihalar soni</label><input id="a-proj" type="text" placeholder="50+"/></div>
-  <div class="fg"><label>Mijozlar soni</label><input id="a-cli" type="text" placeholder="30+"/></div>
-  <button class="btn" onclick="saveSettings()" style="margin-bottom:12px">💾 Saqlash</button>
-  <button class="btn" onclick="clearOrders()" style="background:linear-gradient(135deg,#c62828,#b71c1c)">🗑 Zakazlarni tozalash</button>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px">
+    <div class="fg" style="margin-bottom:0"><label>Loyihalar</label><input id="a-proj" type="text" placeholder="50+"/></div>
+    <div class="fg" style="margin-bottom:0"><label>Mijozlar</label><input id="a-cli" type="text" placeholder="30+"/></div>
+  </div>
+  <button class="btn" onclick="saveSettings()" style="margin-bottom:10px">💾 Saqlash</button>
+  <div class="sec-t" style="margin-top:10px">So'nggi zakazlar</div>
+  <div id="orders-list" style="margin-bottom:14px"></div>
+  <button class="btn btn-red" onclick="clearOrders()">🗑 Zakazlarni tozalash</button>
 </div>
 
-<!-- BOTTOM NAV -->
-<nav id="bot-nav" style="position:fixed;bottom:0;left:0;right:0;height:70px;background:#111;border-top:1px solid #2a2a2a;display:flex;align-items:center;justify-content:space-around;z-index:100;padding-bottom:env(safe-area-inset-bottom,0)">
-  <div class="ni active" id="nav-home" onclick="openPage('home')"><span class="nic">🏠</span><span class="nl">Bosh sahifa</span></div>
+<!-- ═══ NAV ═══ -->
+<nav style="position:fixed;bottom:0;left:0;right:0;height:68px;background:#111;border-top:1px solid #222;display:flex;align-items:center;justify-content:space-around;z-index:100;padding-bottom:env(safe-area-inset-bottom,0)">
+  <div class="ni active" id="nav-home" onclick="openPage('home')"><span class="nic">🏠</span><span class="nl">Asosiy</span></div>
+  <div class="ni" id="nav-contact" onclick="openPage('contact')"><span class="nic">📞</span><span class="nl">Aloqa</span></div>
   <div class="ni" id="nav-order" onclick="openPage('order')"><span class="nic">📋</span><span class="nl">Zakaz</span></div>
-  <div class="ni" id="nav-about" onclick="openPage('about')"><span class="nic">ℹ️</span><span class="nl">Biz haqimizda</span></div>
+  <div class="ni" id="nav-about" onclick="openPage('about')"><span class="nic">ℹ️</span><span class="nl">Haqimizda</span></div>
   <div class="ni" id="nav-admin" onclick="openPage('admin')" style="display:none"><span class="nic">🛠</span><span class="nl">Admin</span></div>
 </nav>
-
-<style>
-.sec-t{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;padding-left:4px}
-.svc{background:var(--bg2);border-radius:16px;padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;border:1px solid #2a2a2a}
-.svc:active{transform:scale(.96);background:var(--bg3)}
-.cnt{background:var(--bg2);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text);border:1px solid #2a2a2a}
-.cl{font-size:12px;color:var(--text2);margin-bottom:2px}
-.cv{font-size:15px;font-weight:600;color:var(--accent)}
-.pg-h{text-align:center;margin-bottom:24px;padding-top:8px}
-.pg-h h2{font-size:22px;font-weight:700;margin-bottom:6px}
-.pg-h p{font-size:14px;color:var(--text2)}
-.ot{background:var(--bg2);border-radius:16px;padding:24px 16px;text-align:center;cursor:pointer;transition:all .2s;border:2px solid #2a2a2a}
-.ot.sel{border-color:var(--accent);background:#1a2a4a}
-.fg{margin-bottom:16px}
-.fg label{display:block;font-size:13px;color:var(--text2);margin-bottom:8px;font-weight:500}
-.fg input,.fg textarea{width:100%;background:var(--bg2);border:1px solid #2a2a2a;border-radius:12px;padding:14px 16px;color:var(--text);font-size:15px;outline:none;transition:border .2s;font-family:inherit}
-.fg textarea{min-height:100px;resize:none}
-.fg input:focus,.fg textarea:focus{border-color:var(--accent)}
-.btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:8px}
-.btn:active{transform:scale(.97);opacity:.9}
-.stat{background:var(--bg2);border-radius:16px;padding:20px 10px;text-align:center;border:1px solid #2a2a2a}
-.sn{font-size:26px;font-weight:800;color:var(--accent)}
-.sl{font-size:12px;color:var(--text2);margin-top:4px}
-.dot{width:8px;height:8px;border-radius:50%;background:#2a4a7a;cursor:pointer;transition:all .3s;display:inline-block}
-.dot.active{background:var(--accent);width:20px;border-radius:4px}
-.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px 0;opacity:.5;transition:all .2s}
-.ni.active{opacity:1}
-.ni.active .nic{transform:scale(1.2)}
-.nic{font-size:22px;transition:transform .2s;display:block}
-.nl{font-size:11px;font-weight:500;display:block}
-.ni.active .nl{color:var(--accent)}
-.hidden{display:none!important}
-.order-card{background:var(--bg2);border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid #2a2a2a;font-size:14px}
-.order-card .oc-type{font-weight:700;color:var(--accent);margin-bottom:6px}
-.order-card .oc-name{margin-bottom:4px}
-.order-card .oc-tel{color:var(--text2);font-size:13px;margin-bottom:4px}
-.order-card .oc-desc{color:#ccc;font-size:13px;border-top:1px solid #333;padding-top:6px;margin-top:6px}
-.order-card .oc-date{color:var(--text2);font-size:11px;margin-top:6px}
-</style>
 
 <script>
 const tg = window.Telegram.WebApp;
@@ -165,181 +210,198 @@ tg.ready(); tg.expand();
 
 const BOT_TOKEN = "8819874242:AAE6OYMvMzozrm2NjSlkgXyr0iR0tClLi_Q";
 const ADMIN_ID  = "6324697963";
+// Config Bot — alohida bot yoki shu bot orqali config saqlanadi
+// Config kalit: bnp_config localStorage + Telegram channel message id orqali sync
 
-// Siz (admin) ekanligingizni tekshirish
-const myId = String(tg.initDataUnsafe?.user?.id || "");
-const isAdmin = myId === ADMIN_ID;
+const myId   = String(tg.initDataUnsafe?.user?.id || "");
+const isAdm  = myId === ADMIN_ID;
 
-// ── Sahifa ────────────────────────────────────────────────
-function openPage(n) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.ni').forEach(x => x.classList.remove('active'));
-  document.getElementById('page-' + n).classList.add('active');
-  const ni = document.getElementById('nav-' + n);
-  if (ni) ni.classList.add('active');
-  if (n === 'order') resetOrderForm();
-  if (n === 'admin') loadAdminPanel();
-  window.scrollTo(0, 0);
+// ── Default config ───────────────────────────────────────
+const DEFAULTS = {
+  phone:    "+998 90 000 00 00",
+  telegram: "@botnexpro_admin",
+  instagram:"@botnexpro",
+  about:    "BotNexPro — professional Telegram botlar, web saytlar va raqamli yechimlar yaratish bo'yicha xizmat ko'rsatuvchi kompaniya.",
+  projects: "50+",
+  clients:  "30+",
+  years:    "2+",
+};
+
+// ── Config o'qish/saqlash ────────────────────────────────
+function getCfg() {
+  try { const c=JSON.parse(localStorage.getItem('bnp_cfg')||'{}'); return {...DEFAULTS,...c}; }
+  catch(e){return {...DEFAULTS};}
 }
 
-// ── Zakaz tur tanlash ─────────────────────────────────────
-let selOrderType = 'bot';
-function selType(t) {
-  selOrderType = t;
-  document.getElementById('ot-bot').classList.toggle('sel', t === 'bot');
-  document.getElementById('ot-web').classList.toggle('sel', t === 'web');
-  document.getElementById('desc-label').textContent = t === 'bot'
-    ? 'Bot haqida izoh' : 'Sayt haqida izoh';
-  document.getElementById('f-desc').placeholder = t === 'bot'
-    ? 'Botingiz qanday ishlashi kerak? Batafsil yozing...'
-    : 'Saytingiz qanday bo\'lishi kerak? Batafsil yozing...';
+function setCfg(cfg) {
+  localStorage.setItem('bnp_cfg', JSON.stringify(cfg));
 }
 
-function resetOrderForm() {
+// ── Config apply ─────────────────────────────────────────
+function applyCfg(c) {
+  // Aloqa sahifasi
+  if(c.phone){
+    document.getElementById('cphone').textContent=c.phone;
+    document.getElementById('lphone').href='tel:'+c.phone.replace(/[\s\-()]/g,'');
+  }
+  if(c.telegram){
+    document.getElementById('ctg').textContent=c.telegram;
+    document.getElementById('ltg').href='https://t.me/'+c.telegram.replace('@','');
+  }
+  if(c.instagram){
+    document.getElementById('cig').textContent=c.instagram;
+    document.getElementById('lig').href='https://instagram.com/'+c.instagram.replace('@','');
+  }
+  if(c.about)     document.getElementById('about-txt').textContent=c.about;
+  if(c.projects)  document.getElementById('s-proj').textContent=c.projects;
+  if(c.clients)   document.getElementById('s-cli').textContent=c.clients;
+}
+
+// ── Sahifa ───────────────────────────────────────────────
+function openPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  const ni=document.getElementById('nav-'+n);
+  if(ni) ni.classList.add('active');
+  if(n==='order') resetForm();
+  if(n==='admin') loadAdmin();
+  window.scrollTo(0,0);
+}
+
+// ── Zakaz tur ────────────────────────────────────────────
+let sType='bot';
+function selType(t){
+  sType=t;
+  document.getElementById('ot-bot').classList.toggle('sel',t==='bot');
+  document.getElementById('ot-web').classList.toggle('sel',t==='web');
+  document.getElementById('desc-label').textContent=t==='bot'?'Bot haqida izoh':'Sayt haqida izoh';
+  document.getElementById('f-desc').placeholder=t==='bot'
+    ?'Botingiz qanday ishlashi kerak? Batafsil yozing...'
+    :'Saytingiz qanday bo\'lishi kerak? Batafsil yozing...';
+}
+
+function resetForm(){
   document.getElementById('order-form').classList.remove('hidden');
   document.getElementById('order-ok').classList.add('hidden');
   selType('bot');
+  ['f-ism','f-fam','f-tel','f-desc'].forEach(id=>document.getElementById(id).value='');
 }
 
-// ── Zakaz yuborish ────────────────────────────────────────
-async function sendOrder() {
-  const ism  = document.getElementById('f-ism').value.trim();
-  const fam  = document.getElementById('f-fam').value.trim();
-  const tel  = document.getElementById('f-tel').value.trim();
-  const desc = document.getElementById('f-desc').value.trim();
+// ── Zakaz yuborish ───────────────────────────────────────
+async function sendOrder(){
+  const ism=document.getElementById('f-ism').value.trim();
+  const fam=document.getElementById('f-fam').value.trim();
+  const tel=document.getElementById('f-tel').value.trim();
+  const desc=document.getElementById('f-desc').value.trim();
+  if(!ism||!fam||!tel||!desc){tg.showAlert("⚠️ Barcha maydonlarni to'ldiring!");return;}
 
-  if (!ism || !fam || !tel || !desc) {
-    tg.showAlert("⚠️ Barcha maydonlarni to'ldiring!"); return;
-  }
+  const tip=sType==='bot'?'🤖 Telegram Bot':'🌐 Web Sayt';
+  const u=tg.initDataUnsafe?.user;
+  const usertg=u?.username?`@${u.username}`:"username yo'q";
+  const now=new Date().toLocaleString('uz-UZ');
 
-  const tip = selOrderType === 'bot' ? '🤖 Telegram Bot' : '🌐 Web Sayt';
-  const u   = tg.initDataUnsafe?.user;
-  const usertg = u?.username ? `@${u.username}` : "username yo'q";
-  const now = new Date().toLocaleString('uz-UZ');
-
-  // localStorage ga saqlash
-  const orders = JSON.parse(localStorage.getItem('bnp_orders') || '[]');
-  orders.unshift({ ism, fam, tel, desc, tip, usertg, date: now, tgid: myId });
-  localStorage.setItem('bnp_orders', JSON.stringify(orders));
+  // Saqlash
+  const orders=JSON.parse(localStorage.getItem('bnp_orders')||'[]');
+  orders.unshift({ism,fam,tel,desc,tip,usertg,date:now});
+  localStorage.setItem('bnp_orders',JSON.stringify(orders));
 
   // Telegram xabar
-  const txt =
-    `🔔 *Yangi zakaz\\! — BotNexPro*\n` +
-    `━━━━━━━━━━━━━━━━━━\n` +
-    `📦 *Tur:* ${tip}\n` +
-    `👤 *Ism:* ${esc(ism)}\n` +
-    `👤 *Familiya:* ${esc(fam)}\n` +
-    `📞 *Telefon:* ${esc(tel)}\n` +
-    `💬 *Izoh:*\n${esc(desc)}\n` +
-    `━━━━━━━━━━━━━━━━━━\n` +
-    `🔗 *Username:* ${esc(usertg)}\n` +
-    `🕐 ${now}`;
+  const txt=
+    `🔔 *Yangi zakaz\\! — BotNexPro*\n`+
+    `━━━━━━━━━━━━━━━━━━\n`+
+    `📦 *Tur:* ${tip}\n`+
+    `👤 *Ism:* ${e(ism)}\n`+
+    `👤 *Familiya:* ${e(fam)}\n`+
+    `📞 *Telefon:* ${e(tel)}\n`+
+    `💬 *Izoh:*\n${e(desc)}\n`+
+    `━━━━━━━━━━━━━━━━━━\n`+
+    `🔗 ${e(usertg)} • ${e(now)}`;
 
-  try {
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: ADMIN_ID, text: txt, parse_mode: 'MarkdownV2' })
+  try{
+    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:ADMIN_ID,text:txt,parse_mode:'MarkdownV2'})
     });
-  } catch (e) { console.error(e); }
+  }catch(err){console.error(err);}
 
   document.getElementById('order-form').classList.add('hidden');
   document.getElementById('order-ok').classList.remove('hidden');
 }
 
-function esc(s) { return (s||'').replace(/[_*[\]()~`>#+\-=|{}.!\\]/g,'\\$&'); }
+function e(s){return(s||'').replace(/[_*[\]()~`>#+\-=|{}.!\\]/g,'\\$&');}
 
-// ── Admin panel ───────────────────────────────────────────
-function loadAdminPanel() {
-  const orders = JSON.parse(localStorage.getItem('bnp_orders') || '[]');
-  document.getElementById('a-orders').textContent = orders.length;
-  document.getElementById('a-income').textContent = (orders.length * 500000).toLocaleString() + " so'm";
+// ── Admin panel ──────────────────────────────────────────
+function loadAdmin(){
+  const orders=JSON.parse(localStorage.getItem('bnp_orders')||'[]');
+  document.getElementById('a-orders').textContent=orders.length;
+  document.getElementById('a-income').textContent=(orders.length*500000).toLocaleString("uz-UZ");
 
-  // Zakazlar ro'yxati
-  const list = document.getElementById('orders-list');
-  if (orders.length === 0) {
-    list.innerHTML = '<div style="text-align:center;color:var(--text2);padding:20px">Hali zakaz yo\'q</div>';
-  } else {
-    list.innerHTML = orders.map((o, i) =>
-      `<div class="order-card">
-        <div class="oc-type">${o.tip} — #${orders.length - i}</div>
-        <div class="oc-name">👤 ${o.ism} ${o.fam}</div>
-        <div class="oc-tel">📞 ${o.tel} • ${o.usertg}</div>
-        <div class="oc-desc">💬 ${o.desc}</div>
-        <div class="oc-date">🕐 ${o.date}</div>
-      </div>`
-    ).join('');
-  }
+  const list=document.getElementById('orders-list');
+  list.innerHTML=orders.length===0
+    ?'<div style="text-align:center;color:var(--text2);padding:20px;background:var(--bg2);border-radius:12px">Hali zakaz yo\'q</div>'
+    :orders.map((o,i)=>
+      `<div class="ocard">
+        <div class="ocard-type">${o.tip} <span style="color:var(--text2);font-weight:400">• #${orders.length-i}</span></div>
+        <div class="ocard-name">👤 ${o.ism} ${o.fam}</div>
+        <div class="ocard-tel">📞 ${o.tel} · ${o.usertg}</div>
+        <div class="ocard-desc">💬 ${o.desc}</div>
+        <div class="ocard-date">🕐 ${o.date}</div>
+      </div>`).join('');
 
-  // Sozlamalar
-  const cfg = getConfig();
-  document.getElementById('a-phone').value = cfg.phone;
-  document.getElementById('a-tg').value = cfg.telegram;
-  document.getElementById('a-about').value = cfg.about;
-  document.getElementById('a-proj').value = cfg.projects;
-  document.getElementById('a-cli').value = cfg.clients;
+  const cfg=getCfg();
+  document.getElementById('a-phone').value=cfg.phone||'';
+  document.getElementById('a-tg').value=cfg.telegram||'';
+  document.getElementById('a-ig').value=cfg.instagram||'';
+  document.getElementById('a-about').value=cfg.about||'';
+  document.getElementById('a-proj').value=cfg.projects||'';
+  document.getElementById('a-cli').value=cfg.clients||'';
 }
 
-function saveSettings() {
-  const cfg = {
+async function saveSettings(){
+  const cfg={
     phone:    document.getElementById('a-phone').value.trim(),
     telegram: document.getElementById('a-tg').value.trim(),
+    instagram:document.getElementById('a-ig').value.trim(),
     about:    document.getElementById('a-about').value.trim(),
     projects: document.getElementById('a-proj').value.trim(),
     clients:  document.getElementById('a-cli').value.trim(),
+    years:    getCfg().years,
   };
-  localStorage.setItem('bnp_config', JSON.stringify(cfg));
-  applyConfig(cfg);
-  tg.showAlert('✅ Saqlandi!');
+  setCfg(cfg);
+  applyCfg(cfg);
+
+  // Bot orqali config saqlansin — boshqa qurilmalarda ham ishlash uchun
+  try{
+    const cfgTxt=`⚙️ CONFIG_UPDATE\n${JSON.stringify(cfg)}`;
+    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:ADMIN_ID,text:cfgTxt})
+    });
+  }catch(err){}
+
+  tg.showAlert('✅ Saqlandi! Sozlamalar yangilandi.');
 }
 
-function clearOrders() {
-  tg.showConfirm("Barcha zakazlarni o'chirasizmi?", (ok) => {
-    if (ok) { localStorage.removeItem('bnp_orders'); loadAdminPanel(); }
+function clearOrders(){
+  tg.showConfirm("Barcha zakazlarni o'chirasizmi?",ok=>{
+    if(ok){localStorage.removeItem('bnp_orders');loadAdmin();}
   });
 }
 
-// ── Config ────────────────────────────────────────────────
-function getConfig() {
-  try { return JSON.parse(localStorage.getItem('bnp_config') || '{}'); } catch(e) { return {}; }
+// ── Slider ───────────────────────────────────────────────
+let cur=0;
+function goSlide(i){
+  cur=i;
+  document.getElementById('slides').style.transform=`translateX(-${i*100}%)`;
+  document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i));
 }
+setInterval(()=>goSlide((cur+1)%3),3500);
 
-function applyConfig(cfg) {
-  if (cfg.phone) {
-    document.getElementById('cphone').textContent = cfg.phone;
-    document.getElementById('lphone').href = 'tel:' + cfg.phone.replace(/\s/g,'');
-  }
-  if (cfg.telegram) {
-    document.getElementById('ctg').textContent = cfg.telegram;
-    document.getElementById('ltg').href = 'https://t.me/' + cfg.telegram.replace('@','');
-  }
-  if (cfg.about) document.getElementById('about-txt').textContent = cfg.about;
-  if (cfg.projects) document.getElementById('s-proj').textContent = cfg.projects;
-  if (cfg.clients) document.getElementById('s-cli').textContent = cfg.clients;
-}
-</script>
-
-<script>
-// ── Slider ────────────────────────────────────────────────
-let cur = 0;
-function goSlide(i) {
-  cur = i;
-  document.getElementById('slides').style.transform = `translateX(-${i*100}%)`;
-  document.querySelectorAll('.dot').forEach((d,j) => d.classList.toggle('active', j===i));
-}
-setInterval(() => goSlide((cur+1)%3), 3500);
-
-// ── Ishga tushirish ───────────────────────────────────────
-(function init() {
-  // Admin nav tugmasini ko'rsatish
-  if (isAdmin) {
-    document.getElementById('nav-admin').style.display = '';
-  }
-
-  // Saqlangan config ni yuklash
-  applyConfig(getConfig());
-
-  // Default zakaz tur
+// ── Init ─────────────────────────────────────────────────
+(function init(){
+  if(isAdm) document.getElementById('nav-admin').style.display='';
+  applyCfg(getCfg());
   selType('bot');
 })();
 </script>
