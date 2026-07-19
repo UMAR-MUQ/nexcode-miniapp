@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexCode.uz</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#0f0f0f;--bg2:#1a1a1a;--bg3:#242424;
+      --accent:#4f8ef7;--accent2:#6c63ff;
+      --text:#fff;--text2:#aaa;--nav-h:70px;--r:16px;
+    }
+    html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;overflow-x:hidden}
+    .page{display:none;padding:16px 16px calc(var(--nav-h) + 16px);animation:fi .2s ease}
+    .page.active{display:block}
+    @keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+    /* Banner */
+    .banner{background:linear-gradient(135deg,#1e3a5f,#0f1e35);border-radius:var(--r);padding:28px 20px 20px;margin-bottom:24px;overflow:hidden;border:1px solid #1e3a5f}
+    .banner-slider{display:flex;transition:transform .4s ease}
+    .banner-slide{min-width:100%;text-align:center}
+    .banner-icon{font-size:48px;margin-bottom:12px}
+    .banner-slide h2{font-size:20px;font-weight:700;margin-bottom:6px}
+    .banner-slide p{font-size:14px;color:#8ab4f8}
+    .banner-dots{display:flex;justify-content:center;gap:6px;margin-top:16px}
+    .dot{width:8px;height:8px;border-radius:50%;background:#2a4a7a;cursor:pointer;transition:all .3s}
+    .dot.active{background:var(--accent);width:20px;border-radius:4px}
+
+    /* Sections */
+    .sec-title{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;padding-left:4px}
+    .services{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+    .svc-card{background:var(--bg2);border-radius:var(--r);padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;border:1px solid #2a2a2a}
+    .svc-card:active{transform:scale(.96);background:var(--bg3)}
+    .svc-icon{font-size:28px}
+
+    /* Contact */
+    .contacts{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+    .cnt-card{background:var(--bg2);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text);border:1px solid #2a2a2a;transition:all .2s}
+    .cnt-card:active{background:var(--bg3)}
+    .cnt-icon{font-size:24px}
+    .cnt-label{font-size:12px;color:var(--text2);margin-bottom:2px}
+    .cnt-val{font-size:15px;font-weight:600;color:var(--accent)}
+
+    /* Page header */
+    .pg-head{text-align:center;margin-bottom:24px;padding-top:8px}
+    .pg-head h2{font-size:22px;font-weight:700;margin-bottom:6px}
+    .pg-head p{font-size:14px;color:var(--text2)}
+
+    /* Order */
+    .order-types{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+    .ot-card{background:var(--bg2);border-radius:var(--r);padding:24px 16px;text-align:center;cursor:pointer;transition:all .2s;border:2px solid #2a2a2a}
+    .ot-card:active,.ot-card.sel{border-color:var(--accent);background:#1a2a4a}
+    .ot-icon{font-size:40px;margin-bottom:12px}
+    .ot-name{font-size:15px;font-weight:700;margin-bottom:6px}
+    .ot-desc{font-size:12px;color:var(--text2);line-height:1.4}
+
+    /* Form */
+    .frm{margin-top:4px}
+    .frm-back{font-size:14px;color:var(--accent);cursor:pointer;margin-bottom:16px;padding:4px 0}
+    .frm-grp{margin-bottom:16px}
+    .frm-grp label{display:block;font-size:13px;color:var(--text2);margin-bottom:8px;font-weight:500}
+    .frm-grp input,.frm-grp textarea{width:100%;background:var(--bg2);border:1px solid #2a2a2a;border-radius:12px;padding:14px 16px;color:var(--text);font-size:15px;outline:none;transition:border .2s;font-family:inherit}
+    .frm-grp textarea{min-height:100px;resize:none}
+    .frm-grp input:focus,.frm-grp textarea:focus{border-color:var(--accent)}
+    .btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:8px}
+    .btn:active{transform:scale(.97);opacity:.9}
+
+    /* Success */
+    .success{text-align:center;padding:40px 20px;background:var(--bg2);border-radius:var(--r);border:1px solid #2a3a2a;margin-top:20px}
+    .success .ico{font-size:60px;margin-bottom:16px}
+    .success h3{font-size:22px;font-weight:700;margin-bottom:10px}
+    .success p{font-size:14px;color:var(--text2);margin-bottom:24px;line-height:1.6}
+
+    /* About */
+    .about-logo{text-align:center;margin-bottom:20px}
+    .about-logo-txt{font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .about-txt{background:var(--bg2);border-radius:var(--r);padding:18px;font-size:15px;line-height:1.7;color:#ddd;margin-bottom:20px;border:1px solid #2a2a2a;white-space:pre-wrap}
+    .stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+    .stat{background:var(--bg2);border-radius:var(--r);padding:20px 10px;text-align:center;border:1px solid #2a2a2a}
+    .stat-n{font-size:26px;font-weight:800;color:var(--accent)}
+    .stat-l{font-size:12px;color:var(--text2);margin-top:4px}
+
+    /* Nav */
+    .bot-nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:#111;border-top:1px solid #2a2a2a;display:flex;align-items:center;justify-content:space-around;z-index:100;padding-bottom:env(safe-area-inset-bottom,0)}
+    .nav-it{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px 0;transition:all .2s;opacity:.5}
+    .nav-it.active{opacity:1}
+    .nav-it.active .nav-ic{transform:scale(1.2)}
+    .nav-ic{font-size:22px;transition:transform .2s}
+    .nav-lb{font-size:11px;font-weight:500}
+    .nav-it.active .nav-lb{color:var(--accent)}
+    .hidden{display:none!important}
+  </style>
+</head>
+<body>
+
+<!-- BOSH SAHIFA -->
+<div id="page-home" class="page active">
+  <div class="banner">
+    <div class="banner-slider" id="slider">
+      <div class="banner-slide"><div class="banner-icon">🤖</div><h2>Telegram Bot yaratish</h2><p>Biznes uchun professional botlar</p></div>
+      <div class="banner-slide"><div class="banner-icon">🌐</div><h2>Web Sayt yaratish</h2><p>Zamonaviy va tez veb-saytlar</p></div>
+      <div class="banner-slide"><div class="banner-icon">⚡</div><h2>Avtomatlashtirish</h2><p>Biznesingizni avtomatlashtiring</p></div>
+    </div>
+    <div class="banner-dots">
+      <span class="dot active" onclick="goSlide(0)"></span>
+      <span class="dot" onclick="goSlide(1)"></span>
+      <span class="dot" onclick="goSlide(2)"></span>
+    </div>
+  </div>
+
+  <div class="sec-title">Xizmatlarimiz</div>
+  <div class="services">
+    <div class="svc-card" onclick="openPage('order')"><span class="svc-icon">🤖</span><span>Telegram Bot</span></div>
+    <div class="svc-card" onclick="openPage('order')"><span class="svc-icon">🌐</span><span>Web Sayt</span></div>
+    <div class="svc-card" onclick="openPage('order')"><span class="svc-icon">📱</span><span>Mini App</span></div>
+    <div class="svc-card" onclick="openPage('order')"><span class="svc-icon">⚙️</span><span>CRM / API</span></div>
+  </div>
+
+  <div class="sec-title">Aloqa</div>
+  <div class="contacts">
+    <a id="link-phone" href="tel:+998900000000" class="cnt-card">
+      <span class="cnt-icon">📞</span>
+      <div><div class="cnt-label">Telefon</div><div class="cnt-val" id="c-phone">+998 90 000 00 00</div></div>
+    </a>
+    <a id="link-tg" href="https://t.me/nexcodeuz" target="_blank" class="cnt-card">
+      <span class="cnt-icon">💬</span>
+      <div><div class="cnt-label">Telegram</div><div class="cnt-val" id="c-tg">@nexcodeuz</div></div>
+    </a>
+    <a id="link-ig" href="https://instagram.com/nexcodeuz" target="_blank" class="cnt-card">
+      <span class="cnt-icon">📸</span>
+      <div><div class="cnt-label">Instagram</div><div class="cnt-val" id="c-ig">@nexcodeuz</div></div>
+    </a>
+  </div>
+</div>
+
+<!-- ZAKAZ -->
+<div id="page-order" class="page">
+  <div class="pg-head"><h2>📋 Zakaz berish</h2><p>Qanday xizmat kerakligini tanlang</p></div>
+
+  <div id="step1">
+    <div class="sec-title">Xizmat turini tanlang</div>
+    <div class="order-types">
+      <div class="ot-card" onclick="selType('bot')"><div class="ot-icon">🤖</div><div class="ot-name">Telegram Bot</div><div class="ot-desc">Biznes, do'kon, ariza botlari</div></div>
+      <div class="ot-card" onclick="selType('web')"><div class="ot-icon">🌐</div><div class="ot-name">Web Sayt</div><div class="ot-desc">Landing, korporativ, do'kon</div></div>
+    </div>
+  </div>
+
+  <div id="step-bot" class="frm hidden">
+    <div class="frm-back" onclick="back1()">← Orqaga</div>
+    <div class="sec-title">🤖 Telegram Bot</div>
+    <div class="frm-grp"><label>Bot nomi</label><input id="b-name" type="text" placeholder="Masalan: Do'kon boti"/></div>
+    <div class="frm-grp"><label>Bot qanday ishlashi kerak?</label><textarea id="b-desc" placeholder="Batafsil izohlang..."></textarea></div>
+    <div class="frm-grp"><label>Telefon raqam</label><input id="b-phone" type="tel" placeholder="+998 90 000 00 00"/></div>
+    <button class="btn" onclick="send('bot')">📨 Zakaz yuborish</button>
+  </div>
+
+  <div id="step-web" class="frm hidden">
+    <div class="frm-back" onclick="back1()">← Orqaga</div>
+    <div class="sec-title">🌐 Web Sayt</div>
+    <div class="frm-grp"><label>Sayt nomi / brend</label><input id="w-name" type="text" placeholder="Masalan: NexCode.uz"/></div>
+    <div class="frm-grp"><label>Sayt qanday bo'lishi kerak?</label><textarea id="w-desc" placeholder="Landing page, korporativ sayt..."></textarea></div>
+    <div class="frm-grp"><label>Telefon raqam</label><input id="w-phone" type="tel" placeholder="+998 90 000 00 00"/></div>
+    <button class="btn" onclick="send('web')">📨 Zakaz yuborish</button>
+  </div>
+
+  <div id="step-ok" class="hidden">
+    <div class="success">
+      <div class="ico">✅</div>
+      <h3>Zakaz qabul qilindi!</h3>
+      <p>NexCode.uz jamoasi tez orada siz bilan bog'lanadi.</p>
+      <button class="btn" onclick="openPage('home')">🏠 Bosh sahifaga</button>
+    </div>
+  </div>
+</div>
+
+<!-- BIZ HAQIMIZDA -->
+<div id="page-about" class="page">
+  <div class="pg-head"><h2>ℹ️ Biz haqimizda</h2></div>
+  <div class="about-logo"><div class="about-logo-txt">NexCode.uz</div></div>
+  <div class="about-txt" id="about-txt">NexCode.uz — professional Telegram botlar, web saytlar va raqamli yechimlar yaratish bo'yicha xizmat ko'rsatuvchi kompaniya.</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-n" id="s-proj">50+</div><div class="stat-l">Loyiha</div></div>
+    <div class="stat"><div class="stat-n" id="s-cli">30+</div><div class="stat-l">Mijoz</div></div>
+    <div class="stat"><div class="stat-n" id="s-yr">2+</div><div class="stat-l">Yil tajriba</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="bot-nav">
+  <div class="nav-it active" id="nav-home" onclick="openPage('home')"><span class="nav-ic">🏠</span><span class="nav-lb">Bosh sahifa</span></div>
+  <div class="nav-it" id="nav-order" onclick="openPage('order')"><span class="nav-ic">📋</span><span class="nav-lb">Zakaz</span></div>
+  <div class="nav-it" id="nav-about" onclick="openPage('about')"><span class="nav-ic">ℹ️</span><span class="nav-lb">Biz haqimizda</span></div>
+</nav>
+
+<script>
+const tg = window.Telegram.WebApp;
+tg.ready(); tg.expand();
+
+// Config — siz o'zgartirasiz
+const BOT_TOKEN = "8819874242:AAE6OYMvMzozrm2NjSlkgXyr0iR0tClLi_Q";
+const ADMIN_ID  = "6324697963";
+
+// Sahifa
+function openPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-it').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  document.getElementById('nav-'+n).classList.add('active');
+  if(n==='order') back1();
+  window.scrollTo(0,0);
+}
+
+// Zakaz
+function selType(t){
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step-'+t).classList.remove('hidden');
+}
+function back1(){
+  ['step-bot','step-web','step-ok'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+  document.getElementById('step1').classList.remove('hidden');
+}
+
+async function send(t){
+  let name,desc,phone;
+  if(t==='bot'){name=document.getElementById('b-name').value.trim();desc=document.getElementById('b-desc').value.trim();phone=document.getElementById('b-phone').value.trim();}
+  else{name=document.getElementById('w-name').value.trim();desc=document.getElementById('w-desc').value.trim();phone=document.getElementById('w-phone').value.trim();}
+  if(!name||!desc||!phone){tg.showAlert("⚠️ Barcha maydonlarni to'ldiring!");return;}
+
+  const u=tg.initDataUnsafe?.user;
+  const uname=u?`${u.first_name||''} ${u.last_name||''}`.trim():"Noma'lum";
+  const usertg=u?.username?`@${u.username}`:"username yo'q";
+  const tip=t==='bot'?'🤖 Telegram Bot':'🌐 Web Sayt';
+
+  const txt=
+    `🔔 *Yangi zakaz\\! — NexCode\\.uz*\n`+
+    `━━━━━━━━━━━━━━━━━━\n`+
+    `📦 *Tur:* ${tip}\n`+
+    `📝 *Nomi:* ${esc(name)}\n`+
+    `💬 *Tavsif:*\n${esc(desc)}\n`+
+    `📞 *Telefon:* ${esc(phone)}\n`+
+    `━━━━━━━━━━━━━━━━━━\n`+
+    `👤 *Telegram:* ${esc(uname)}\n`+
+    `🔗 *Username:* ${esc(usertg)}`;
+
+  try{
+    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:ADMIN_ID,text:txt,parse_mode:'MarkdownV2'})
+    });
+  }catch(e){console.error(e);}
+
+  ['step-bot','step-web','step1'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+  document.getElementById('step-ok').classList.remove('hidden');
+  ['b-name','b-desc','b-phone','w-name','w-desc','w-phone'].forEach(id=>document.getElementById(id).value='');
+}
+
+function esc(s){return(s||'').replace(/[_*[\]()~`>#+\-=|{}.!\\]/g,'\\$&');}
+
+// Slider
+let cur=0;
+function goSlide(i){cur=i;document.getElementById('slider').style.transform=`translateX(-${i*100}%)`;document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i));}
+setInterval(()=>goSlide((cur+1)%3),3500);
+</script>
+</body>
+</html>
